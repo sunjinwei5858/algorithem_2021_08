@@ -12,7 +12,7 @@ import java.util.List;
  *
  * 进阶：如何剪枝？？？ 自己还不是很懂 不是很理解 所以导致没做出来
  */
-public class ZuHe_01 {
+public class Zuhe_01 {
 
     public List<List<Integer>> res = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class ZuHe_01 {
     }
 
     public static void main(String[] args) {
-        ZuHe_01 zuhe01 = new ZuHe_01();
+        Zuhe_01 zuhe01 = new Zuhe_01();
         List<List<Integer>> combine = zuhe01.combine2(4, 3);
         for (List<Integer> integers : combine) {
             System.out.println(integers.toString());

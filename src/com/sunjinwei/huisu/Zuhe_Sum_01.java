@@ -24,6 +24,14 @@ public class Zuhe_Sum_01 {
         return res;
     }
 
+    /**
+     * 因为这里是重复选取 所以每次递归传入i 那么终止条件 startIndex 永远不会等于candidates的length，该终止条件可以不需要
+     *
+     * @param candidates
+     * @param target
+     * @param startIndex
+     * @param path
+     */
     private void backTrack(int[] candidates, int target, int startIndex, LinkedList<Integer> path) {
         // 终止条件1
         if (target == 0) {
@@ -32,10 +40,6 @@ public class Zuhe_Sum_01 {
         }
         // 终止条件2
         if (target < 0) {
-            return;
-        }
-        // 终止条件3
-        if (startIndex == candidates.length) {
             return;
         }
         for (int i = startIndex; i < candidates.length; i++) {
@@ -64,9 +68,6 @@ public class Zuhe_Sum_01 {
     private void backTrack2(int[] candidates, int target, int startIndex, LinkedList<Integer> path) {
         if (target == 0) {
             res.add(new ArrayList<>(path));
-            return;
-        }
-        if (startIndex == candidates.length) {
             return;
         }
         for (int i = 0; i < candidates.length; i++) {

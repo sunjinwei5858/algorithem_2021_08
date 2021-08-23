@@ -12,7 +12,7 @@ package com.sunjinwei.tree;
 public class ConstructMaximumBinaryTree {
 
     /**
-     * 构造二叉树的题目 都可以采用传入索引的方式进行递归，一般都是前序遍历处理
+     * 左闭右开
      *
      * @param nums
      * @return
@@ -21,6 +21,7 @@ public class ConstructMaximumBinaryTree {
         if (nums == null || nums.length == 0) {
             return null;
         }
+        // 左闭右开
         return process(nums, 0, nums.length);
     }
 
@@ -54,4 +55,40 @@ public class ConstructMaximumBinaryTree {
         }
         return res;
     }
+
+    /**
+     * 左闭右闭
+     *
+     * @param nums
+     * @return
+     */
+    public TreeNode constructMaximumBinaryTree2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        // 左闭右闭
+        return process2(nums, 0, nums.length - 1);
+    }
+
+    private TreeNode process2(int[] nums, int l, int r) {
+        if (l > r) {
+            return null;
+        }
+        int maxIndex = getArrayMaxIndex2(nums, l, r);
+        TreeNode root = new TreeNode(nums[maxIndex]);
+        root.left = process2(nums, l, maxIndex - 1);
+        root.right = process2(nums, maxIndex + 1, r);
+        return root;
+    }
+
+    private int getArrayMaxIndex2(int[] nums, int l, int r) {
+        int res = l;
+        for (int i = l; i <= r; i++) {
+            if (nums[i] > nums[res]) {
+                res = i;
+            }
+        }
+        return res;
+    }
+
 }

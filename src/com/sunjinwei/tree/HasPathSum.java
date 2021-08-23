@@ -1,10 +1,11 @@
 package com.sunjinwei.tree;
 
 /**
- * 路径总和，举一反三：回溯算法中的组合总和
+ * 路径总和，举一反三：回溯算法中的组合总和 【力扣112】
  * 给定⼀个⼆叉树和⼀个⽬标和，判断该树中是否存在根节点到叶⼦节点的路径，这条路径上所有节点值相加等于⽬
  * 标和。
  * 注意：一定是根节点到叶子节点
+ * ps：这里不需要遍历二叉树所有节点 所以递归函数需要有返回值
  */
 public class HasPathSum {
 
@@ -45,6 +46,13 @@ public class HasPathSum {
         return false;
     }
 
+    /**
+     * 方法2：
+     *
+     * @param root
+     * @param targetSum
+     * @return
+     */
     public boolean hasPathSum2(TreeNode root, int targetSum) {
         if (root == null) {
             return false;

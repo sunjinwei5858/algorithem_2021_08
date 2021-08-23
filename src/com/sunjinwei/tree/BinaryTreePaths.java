@@ -14,7 +14,7 @@ public class BinaryTreePaths {
     private List<String> res = new ArrayList<>();
 
     /**
-     * 因为是根节点到叶子节点 所以使用前序遍历
+     * 方法1：使用LinkedList接收 到达了叶子节点再处理，也是属于提前处理
      *
      * @param root
      * @return
@@ -23,18 +23,13 @@ public class BinaryTreePaths {
         if (root == null) {
             return res;
         }
-        backTrack(root, new LinkedList<Integer>());
+        LinkedList<Integer> path = new LinkedList<>();
+        path.add(root.val);
+        backTrack(root, path);
         return res;
     }
 
     private void backTrack(TreeNode root, LinkedList<Integer> path) {
-        // 终止条件1
-        if (root == null) {
-            return;
-        }
-        // 根节点
-        path.add(root.val);
-        // 终止条件2：真正的处理逻辑
         if (root.left == null && root.right == null) {
             // 处理
             String s = "";
@@ -43,18 +38,22 @@ public class BinaryTreePaths {
             }
             s += path.get(path.size() - 1);
             res.add(s);
-            // 撤销选择
-            path.removeLast();
             return;
         }
-        backTrack(root.left, path);
-        backTrack(root.right, path);
-        // 撤销选择
-        path.removeLast();
+        if (root.left != null) {
+            path.add(root.left.val);
+            backTrack(root.left, path);
+            path.removeLast();
+        }
+        if (root.right != null) {
+            path.add(root.right.val);
+            backTrack(root.right, path);
+            path.removeLast();
+        }
     }
 
     /**
-     * 方法2：简洁处理
+     * 方法2：不提前添加 使用字符串
      *
      * @param root
      * @return
@@ -63,7 +62,7 @@ public class BinaryTreePaths {
         if (root == null) {
             return res;
         }
-        backTrack2(root, new String());
+        backTrack2(root, "");
         return res;
     }
 
@@ -79,5 +78,29 @@ public class BinaryTreePaths {
         }
         backTrack2(root.left, path + "->");
         backTrack2(root.right, path + "->");
+    }
+
+    /**
+     * 方法3：提前添加 使用字符串
+     */
+    public List<String> binaryTreePaths3(TreeNode root) {
+        if (root == null) {
+            return res;
+        }
+        backTrack3(root, root.val + "");
+        return res;
+    }
+
+    private void backTrack3(TreeNode root, String path) {
+        if (root.left == null && root.right == null) {
+            res.add(path);
+            return;
+        }
+        if (root.left != null) {
+            backTrack3(root.left, path + "->" + root.left.val);
+        }
+        if (root.right != null) {
+            backTrack3(root.right, path + "->" + root.right.val);
+        }
     }
 }

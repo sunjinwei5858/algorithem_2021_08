@@ -11,7 +11,6 @@ public class HasPathSum {
 
     /**
      * 方法1：提前减去root.val
-     * 只需要遍历单边 递归函数需要返回值，如果是遍历整颗树 可以没有返回值
      *
      * @param root
      * @param targetSum
@@ -26,16 +25,12 @@ public class HasPathSum {
     }
 
     private boolean process(TreeNode root, int targetSum) {
-        if (root == null) {
-            return false;
-        }
-        TreeNode left = root.left;
-        TreeNode right = root.right;
         // 1 因为提前减去 所以这里是判断targetSum=0
-        if (left == null && right == null && targetSum == 0) {
+        if (root.left == null && root.right == null && targetSum == 0) {
             return true;
         }
         // 2 处理左子树和右子树时 也要提前减去 但是需要判空
+        // 因为终⽌条件是判断叶⼦节点，所以递归的过程中就不要让空节点进⼊递归了。
         if (root.left != null) {
             boolean l = process(root.left, targetSum - root.left.val);
             if (l) {

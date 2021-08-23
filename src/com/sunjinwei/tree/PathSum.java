@@ -1,7 +1,5 @@
 package com.sunjinwei.tree;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +13,9 @@ public class PathSum {
     public List<List<Integer>> res = new ArrayList<>();
 
     /**
-     * 简洁的回溯写法：1.不提前将root的val添加到path  2.不提前减去targetSum
+     * 不提前减：
+     * 1.不提前将root的val添加到path
+     * 2.不提前减去targetSum
      *
      * @param root
      * @param targetSum
@@ -30,9 +30,6 @@ public class PathSum {
     }
 
     private void process(TreeNode root, int targetSum, LinkedList<Integer> path) {
-        if (root == null) {
-            return;
-        }
         // 回溯1
         if (root.left == null && root.right == null && targetSum == root.val) {
             path.add(root.val);
@@ -41,14 +38,23 @@ public class PathSum {
             return;
         }
         // 回溯2
-        path.add(root.val);
-        process(root.left, targetSum - root.val, path);
-        process(root.right, targetSum - root.val, path);
-        path.removeLast();
+        if (root.left != null) {
+            path.add(root.val);
+            process(root.left, targetSum - root.val, path);
+            path.removeLast();
+        }
+        // 回溯3
+        if (root.right != null) {
+            path.add(root.val);
+            process(root.right, targetSum - root.val, path);
+            path.removeLast();
+        }
     }
 
     /**
-     * 细节的回溯写法: 1.提前将root的val添加到path  2.提前减去targetSum
+     * 提前减
+     * 1.提前将root的val添加到path
+     * 2.提前减去targetSum
      *
      * @param root
      * @param targetSum
@@ -60,13 +66,14 @@ public class PathSum {
         }
         LinkedList<Integer> path = new LinkedList<>();
         path.add(root.val);
-        process2(root, targetSum - root.val, new LinkedList<>());
+        process2(root, targetSum - root.val, path);
         return res;
     }
 
     private void process2(TreeNode root, int targetSum, LinkedList<Integer> path) {
         if (root.left == null && root.right == null && targetSum == 0) {
             res.add(new ArrayList<>(path));
+            return;
         }
         if (root.left == null && root.right == null) {
             return;

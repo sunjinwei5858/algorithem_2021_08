@@ -15,7 +15,7 @@ public class PathSum {
     public List<List<Integer>> res = new ArrayList<>();
 
     /**
-     * 简洁的回溯写法：不提前将root的val添加到path
+     * 简洁的回溯写法：1.不提前将root的val添加到path  2.不提前减去targetSum
      *
      * @param root
      * @param targetSum
@@ -48,7 +48,7 @@ public class PathSum {
     }
 
     /**
-     * 细节的回溯写法: 提前将root的val添加到path
+     * 细节的回溯写法: 1.提前将root的val添加到path  2.提前减去targetSum
      *
      * @param root
      * @param targetSum
@@ -60,25 +60,25 @@ public class PathSum {
         }
         LinkedList<Integer> path = new LinkedList<>();
         path.add(root.val);
-        process2(root, targetSum, new LinkedList<>());
+        process2(root, targetSum - root.val, new LinkedList<>());
         return res;
     }
 
     private void process2(TreeNode root, int targetSum, LinkedList<Integer> path) {
-        if (root.left == null && root.right == null && targetSum == root.val) {
-            res.add(path);
+        if (root.left == null && root.right == null && targetSum == 0) {
+            res.add(new ArrayList<>(path));
         }
         if (root.left == null && root.right == null) {
             return;
         }
         if (root.left != null) {
             path.add(root.left.val);
-            process2(root.left, targetSum - root.val, path);
+            process2(root.left, targetSum - root.left.val, path);
             path.removeLast();
         }
         if (root.right != null) {
             path.add(root.right.val);
-            process2(root.right, targetSum - root.val, path);
+            process2(root.right, targetSum - root.right.val, path);
             path.removeLast();
         }
     }

@@ -10,7 +10,7 @@ package com.sunjinwei.tree;
 public class HasPathSum {
 
     /**
-     * 方法1：在root的时候就减去
+     * 方法1：提前减去root.val
      * 只需要遍历单边 递归函数需要返回值，如果是遍历整颗树 可以没有返回值
      *
      * @param root
@@ -26,28 +26,30 @@ public class HasPathSum {
     }
 
     private boolean process(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
         TreeNode left = root.left;
         TreeNode right = root.right;
+        // 1 因为提前减去 所以这里是判断targetSum=0
         if (left == null && right == null && targetSum == 0) {
             return true;
         }
-        if (left != null) {
-            boolean l = process(root.left, targetSum - left.val);
+        // 2 处理左子树和右子树时 也要提前减去 但是需要判空
+        if (root.left != null) {
+            boolean l = process(root.left, targetSum - root.left.val);
             if (l) {
                 return true;
             }
         }
-        if (right != null) {
-            boolean r = process(root.right, targetSum - right.val);
-            if (r) {
-                return true;
-            }
+        if (root.right != null) {
+            return process(root.right, targetSum - root.right.val);
         }
         return false;
     }
 
     /**
-     * 方法2：
+     * 方法2：不提前减去root.val的值
      *
      * @param root
      * @param targetSum

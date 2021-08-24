@@ -27,10 +27,11 @@ public class ZigzagLevelOrder {
                 TreeNode node = queue.poll();
                 // 在添加的时候 进行逻辑处理 层序遍历正常进行
                 if (flag) {
-                    // offerLast和add是一样的语法 先进先出
-                    list.offerLast(node.val);
+                    // 正常添加 添加到队列的尾巴
+                    list.add(node.val);
                 } else {
-                    list.offerFirst(node.val);
+                    // 将元素添加到队首
+                    list.addFirst(node.val);
                 }
                 if (node.left != null) {
                     queue.offer(node.left);

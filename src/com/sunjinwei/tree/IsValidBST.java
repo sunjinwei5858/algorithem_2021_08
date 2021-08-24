@@ -3,6 +3,7 @@ package com.sunjinwei.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * 98 验证二叉搜索树
@@ -101,5 +102,36 @@ public class IsValidBST {
         // 右孩子
         boolean r = process3(root.right, root, max);
         return l && r;
+    }
+
+    /**
+     * 中序遍历 迭代法
+     *
+     * @param root
+     * @return
+     */
+    public boolean isValidBST4(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        TreeNode curr = root;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while (curr != null || !stack.isEmpty()) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            } else {
+                curr = stack.pop();
+                // 逻辑处理
+                if (pre != null && pre.val >= curr.val) {
+                    return false;
+                }
+                // 更新pre
+                pre = curr;
+                curr = curr.right;
+            }
+        }
+        return true;
     }
 }

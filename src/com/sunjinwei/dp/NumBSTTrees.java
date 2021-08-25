@@ -16,6 +16,8 @@ public class NumBSTTrees {
             int sum = 0;
             // !!!! 这里j可以取到i
             for (int j = 1; j <= i; j++) {
+                // dp[i] += dp[以j为头结点左⼦树节点数量] * dp[以j为头结点右⼦树节点数量]
+                // j相当于是头结点的元素，从1遍历到i为⽌。
                 sum += dp[j - 1] * dp[i - j];
             }
             dp[i] = sum;

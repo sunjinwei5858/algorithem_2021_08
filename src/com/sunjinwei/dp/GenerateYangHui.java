@@ -1,12 +1,10 @@
 package com.sunjinwei.dp;
 
-import jdk.nashorn.internal.ir.LiteralNode;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 力扣118 杨辉三角
+ * 力扣118 杨辉三角   【美团面试题】【腾讯面试题】
  * 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。
  * 在「杨辉三角」中，每个数是它左上方和右上方的数的和。
  */

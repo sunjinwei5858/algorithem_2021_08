@@ -99,7 +99,7 @@ public class CanPartition {
         // 遍历：先遍历物品 然后背包重量
         for (int i = 1; i < nums.length; i++) {
             // !!!!! 状态压缩之后 这里一定变成倒叙 不然会重复使用
-            for (int j = sum; j > 0; j--) {
+            for (int j = sum; j >= 0; j--) {
                 if (j < nums[i]) {
                     dp[j] = dp[j];
                 } else {

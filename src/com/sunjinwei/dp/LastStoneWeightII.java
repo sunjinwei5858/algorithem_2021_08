@@ -9,6 +9,7 @@ package com.sunjinwei.dp;
  * 3.根据第二点，可以抽象为背包问题，dp[j]表示背包重量为j 可以获取的最大重量，
  * 4.最后的结果集就是用sum-dp[sum/2]-dp[sum/2]
  * 5.这种一分为二的思想 其实和分割等和子集差不多
+ * 【416. 分割等和⼦集相当于是求背包是否正好装满，⽽本题是求背包最多能装多少。】
  */
 public class LastStoneWeightII {
 

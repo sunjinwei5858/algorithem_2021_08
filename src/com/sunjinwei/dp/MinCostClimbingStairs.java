@@ -32,7 +32,7 @@ public class MinCostClimbingStairs {
             dp[i] = cost[i] + Math.min(dp[i - 1], dp[i - 2]);
         }
         // 到达了最后一步就不需要花费体力了，所以这里需要进行取最小值
-        return Math.max(dp[cost.length - 1], dp[cost.length - 2]);
+        return Math.min(dp[cost.length - 1], dp[cost.length - 2]);
     }
 
     /**

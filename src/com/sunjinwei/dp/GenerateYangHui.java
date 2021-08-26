@@ -37,7 +37,7 @@ public class GenerateYangHui {
     }
 
     /**
-     * 动态规划
+     * 动态规划: 二维数组
      *
      * @param numRows
      * @return
@@ -59,6 +59,37 @@ public class GenerateYangHui {
                     dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
                 }
                 row.add(dp[i][j]);
+            }
+            res.add(row);
+        }
+        return res;
+    }
+
+    /**
+     * 动态规划: 一维数组
+     * ps：
+     * 1 因为杨辉三角 第i行只和i-1行的dp值有关系，所以可以进行降维打击，转化为一维数组 但是要注意j需要从大到小进行遍历
+     *
+     * @param numRows
+     * @return
+     */
+    public List<List<Integer>> generate3(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+        // 状态方程：当前行的dp值
+        int[] dp = new int[numRows];
+        // i 表示第几行
+        // j 表示第几列 j从左到右 j的最大值就是i行 j<=i
+        for (int i = 0; i < numRows; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = i; j >= 0; j--) {
+                // 处理两端的值!!!!!
+                if (j == 0 || j == i) {
+                    dp[j] = 1;
+                } else {
+                    // 否则获取上一层的dp[j-1]和dp[j]
+                    dp[j] = dp[j - 1] + dp[j];
+                }
+                row.add(dp[j]);
             }
             res.add(row);
         }

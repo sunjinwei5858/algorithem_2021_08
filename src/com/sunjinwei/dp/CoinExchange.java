@@ -37,4 +37,38 @@ public class CoinExchange {
         }
         return dp[amount];
     }
+
+    private int res = Integer.MAX_VALUE;
+
+    /**
+     * 递归
+     *
+     * @param coins
+     * @param amount
+     * @return
+     */
+    public int coinChange2(int[] coins, int amount) {
+
+        process(coins, amount, 0, 0);
+        if (res == Integer.MAX_VALUE) {
+            return -1;
+        }
+        return res;
+    }
+
+    private void process(int[] coins, int amount, int start, int count) {
+        if (amount == 0) {
+            res = Math.min(res, count);
+            return;
+        }
+        //!!! 这个终止条件不能少
+        if (amount < 0) {
+            return;
+        }
+        for (int i = start; i < coins.length; i++) {
+            // 可以重复选取 所以继续传入i
+            // count需要加1
+            process(coins, amount - coins[i], i, count + 1);
+        }
+    }
 }

@@ -70,7 +70,7 @@ public class Zuhe_Sum_01 {
             res.add(new ArrayList<>(path));
             return;
         }
-        for (int i = 0; i < candidates.length; i++) {
+        for (int i = startIndex; i < candidates.length; i++) {
             // 这里进行剪枝!!!!! 效率非常明显
             if (candidates[i] > target) {
                 continue;
@@ -89,4 +89,5 @@ public class Zuhe_Sum_01 {
             System.out.println(re.toString());
         }
     }
+
 }

@@ -1,4 +1,4 @@
-package com.sunjinwei.MidSerach;
+package com.sunjinwei.mid_serach;
 
 /**
  * 35. 搜索插入位置

@@ -1,4 +1,4 @@
-package com.sunjinwei.MidSerach;
+package com.sunjinwei.mid_serach;
 
 /**
  * 33. 搜索旋转排序数组

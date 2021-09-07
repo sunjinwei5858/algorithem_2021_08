@@ -15,7 +15,7 @@ public class LargestNumber {
         }
         // 进行排序
         Arrays.sort(strArr, (a, b) -> {
-            return (a + b).compareTo(b + a);
+            return (b + a).compareTo(a + b);
         });
         if (strArr[0].equals("0")) {
             return "0";
@@ -28,10 +28,23 @@ public class LargestNumber {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{10, 2};
+        int[] arr = new int[]{3, 30, 34, 5, 9};
         LargestNumber largestNumber = new LargestNumber();
 
         String s = largestNumber.largestNumber(arr);
         System.out.println(s);
+
+        String s1 = "3";
+        String s2 = "10";
+
+        String[] strArr = new String[]{s1, s2};
+        Arrays.sort(strArr, (a, b) -> {
+                    return a.compareTo(b);
+                }
+        );
+
+        System.out.println(Arrays.toString(strArr));
+
+
     }
 }

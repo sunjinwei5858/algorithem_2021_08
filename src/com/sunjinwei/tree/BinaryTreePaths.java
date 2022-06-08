@@ -21,6 +21,7 @@ public class BinaryTreePaths {
      * @return
      */
     public List<String> binaryTreePaths(TreeNode root) {
+
         if (root == null) {
             return res;
         }
